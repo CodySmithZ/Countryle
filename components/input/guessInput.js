@@ -31,11 +31,19 @@ function GuessInput(props) {
 		}
 	};
 
+	//Clear input and add guess to redux store
+	const onSubmit = () => {
+		if (itemSelected !== null) {
+			dispatch(addGuess(itemSelected));
+			setItemSelected(null);
+			setGuess("");
+		}
+	};
+
 	//When item selected set it to current text and hide selection box
 	useEffect(() => {
 		if (itemSelected !== null) {
 			setGuess(itemSelected.item.name);
-			dispatch(addGuess(itemSelected.item));
 			setShowSuggestions(false);
 		}
 	}, [itemSelected]);
@@ -51,6 +59,9 @@ function GuessInput(props) {
 				show={showSuggestions}
 				onItemPress={(item) => setItemSelected(item)}
 			/>
+			<button className="bg-blue-700" onClick={() => onSubmit()}>
+				Check
+			</button>
 		</div>
 	);
 }

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 function AutoCompleteBox(props) {
 	const [show, setShow] = useState(false);
 	const suggestionsRefs = useRef(props.suggestions.map(() => createRef()));
+
 	//Check if any suggestions are passed
 	useEffect(() => {
 		if (props.suggestions.length > 0 && props.show) {
