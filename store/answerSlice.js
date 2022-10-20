@@ -9,11 +9,11 @@ export const answerSlice = createSlice({
 	initialState,
 	reducers: {
 		setAnswer: (state, action) => {
-			state.value = action.value;
+			state.value = action.payload;
 		},
 	},
 });
 
-export const { addGuess } = answerSlice.actions;
+export const { setAnswer } = answerSlice.actions;
 
 export default answerSlice.reducer;
