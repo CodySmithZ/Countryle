@@ -1,4 +1,4 @@
-export let CountryCords = [
+export const CountryCoords = [
   {
     "Country": "Afghanistan",
     "Alpha2Code": "AF",
