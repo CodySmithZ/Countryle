@@ -25,7 +25,7 @@ function AutoCompleteBox(props) {
 							onClick={() => props.onItemPress(item)}
 							ref={suggestionsRefs.current[index]}
 						>
-							{item.item.code} - {item.item.name}
+							{item.item.Alpha2Code} - {item.item.Country}
 						</div>
 					);
 				})}

@@ -14,9 +14,8 @@ export const NewCountry = () => {
 
 //Check if guess is correct
 export const checkGuess = (guessCounty, answerCountry) => {
-	console.log("DDD", answerCountry);
 	//Compare country codes
-	if (guessCounty.item.code === answerCountry.Alpha2Code) {
+	if (guessCounty.item.Alpha2Code === answerCountry.Alpha2Code) {
 		return true;
 	} else {
 		return false;
@@ -25,28 +24,28 @@ export const checkGuess = (guessCounty, answerCountry) => {
 
 //Check distance from guess to country
 export const getDistanceAndBearing = (guessCounty, answerCountry) => {
-	//Get last submited guess
-	const currentGuess = guessCounty[guessCounty.length - 1];
-
-	//Get last submited guess cords
-	const currentGuessCords = CountryCoords.filter(
-		(country) => country.Alpha2Code === guessCounty.item.code
-	);
-
 	//Calculate distance between both points
 	const distance = getDistanceFromLatLonInKm(
 		answerCountry.Latitude,
 		answerCountry.Longitude,
-		currentGuessCords[0]?.Latitude,
-		currentGuessCords[0]?.Longitude
+		guessCounty.item.Latitude,
+		guessCounty.item.Longitude
+	);
+
+	console.log(
+		"dd",
+		answerCountry.Latitude,
+		answerCountry.Longitude,
+		guessCounty.item.Latitude,
+		guessCounty.item.Longitude
 	);
 
 	//Calculate bearing between both points
 	const bearing = getBearing(
 		answerCountry.Latitude,
 		answerCountry.Longitude,
-		currentGuessCords[0]?.Latitude,
-		currentGuessCords[0]?.Longitude
+		guessCounty.item.Latitude,
+		guessCounty.item.Longitude
 	);
 
 	return { distance: distance, bearing: bearing };
@@ -79,18 +78,21 @@ const rad2deg = (radians) => {
 };
 
 //Calculate bearing of two cordinates, (Retrieved from stack overflow https://stackoverflow.com/questions/46590154/calculate-bearing-between-2-points-with-javascript)
-const getBearing = (startLat, startLng, destLat, destLng) => {
-	destLat = deg2rad(startLat);
-	destLng = deg2rad(startLng);
-	startLat = deg2rad(destLat);
-	startLng = deg2rad(destLng);
+const getBearing = (startLatTmp, startLngTmp, destLatTmp, destLngTmp) => {
+	let destLat = deg2rad(startLatTmp);
+	let destLng = deg2rad(startLngTmp);
+	let startLat = deg2rad(destLatTmp);
+	let startLng = deg2rad(destLngTmp);
 
 	let y = Math.sin(destLng - startLng) * Math.cos(destLat);
 	let x =
 		Math.cos(startLat) * Math.sin(destLat) -
 		Math.sin(startLat) * Math.cos(destLat) * Math.cos(destLng - startLng);
 	let brng = Math.atan2(y, x);
+	console.log("b", brng, y, x);
+
 	brng = rad2deg(brng);
+	console.log("b", brng);
 	return (brng + 360) % 360;
 };
 

@@ -5,7 +5,7 @@ import Guess from "./guess";
 function Guesses(props) {
 	const guesses = useSelector((state) => state.guesses.value);
 	return (
-		<div>
+		<div className=" bg-gray-800 px-2 py-2 w-full">
 			{guesses.map((guess, index) => (
 				<Guess guess={guess} key={index} />
 			))}
