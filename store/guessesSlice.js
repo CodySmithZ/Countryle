@@ -11,9 +11,12 @@ export const guessesSlice = createSlice({
 		addGuess: (state, action) => {
 			state.value.push(action.payload);
 		},
+		clearGuesses: (state) => {
+			state.value = [];
+		},
 	},
 });
 
-export const { addGuess } = guessesSlice.actions;
+export const { addGuess, clearGuesses } = guessesSlice.actions;
 
 export default guessesSlice.reducer;

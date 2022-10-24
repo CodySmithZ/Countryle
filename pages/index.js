@@ -1,7 +1,7 @@
 import CountrySVG from "../components/countrySVG";
 import GuessInput from "../components/input/guessInput";
 import Guesses from "../components/guesses/guesses";
-import Modal from "../components/modal/modal";``
+import CorrectModal from "../components/modal/correctModal";
 import {
 	NewCountry,
 	checkGuess,
@@ -9,13 +9,15 @@ import {
 } from "../components/util";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addGuess } from "../store/guessesSlice";
+import { addGuess, clearGuesses } from "../store/guessesSlice";
+import { showModal, setComplete } from "../store/settingsSlice";
 
 export default function Home() {
 	const guesses = useSelector((state) => state.guesses.value);
 	const answer = useSelector((state) => state.answer.value);
 
 	const guessSelection = useSelector((state) => state.guessSelection.value);
+	const isComplete = useSelector((state) => state.settings.value.complete);
 
 	const dispatch = useDispatch();
 
@@ -29,6 +31,14 @@ export default function Home() {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [guesses]);
+
+	//Start new game, cleans up guesses and answer
+	const newGame = () => {
+		dispatch(setComplete(false));
+		dispatch(showModal(false));
+		dispatch(clearGuesses());
+		NewCountry();
+	};
 
 	//Clear input and add guess to redux store
 	const onSubmit = () => {
@@ -45,6 +55,8 @@ export default function Home() {
 						correct: result,
 					})
 				);
+				dispatch(setComplete(true));
+				dispatch(showModal(true));
 			} else {
 				const { distance, bearing } = getDistanceAndBearing(
 					guessSelection,
@@ -64,10 +76,11 @@ export default function Home() {
 
 	return (
 		<div className={"flex flex-col justify-center items-center"}>
+			<CorrectModal playAgainPress={() => newGame()} />
 			<header className={"text-center text-5xl font-thin"}>
 				Countryle
 			</header>
-			<CountrySVG />
+			<CountrySVG className={"w-1/4"} />
 
 			<div className={"flex justify-center flex-col items-center w-1/2 "}>
 				<GuessInput />
@@ -75,6 +88,14 @@ export default function Home() {
 					Check
 				</button>
 				<Guesses />
+				{isComplete ? (
+					<button
+						className="bg-green-700 rounded-md text-lg py-2 px-2 mt-10 animate-shake border-green-800 border-2"
+						onClick={() => newGame()}
+					>
+						Play Again
+					</button>
+				) : null}
 			</div>
 		</div>
 	);

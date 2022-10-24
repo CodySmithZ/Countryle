@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Fuse from "fuse.js";
 import { CountryCoords } from "../data/countryCoords";
 import AutoCompleteBox from "./autoCompleteBox";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addSelection } from "../../store/guessSelectionSlice";
 
 function GuessInput(props) {
@@ -11,6 +11,9 @@ function GuessInput(props) {
 	const [showSuggestions, setShowSuggestions] = useState(false);
 	const [suggestions, setSuggestions] = useState([]);
 	const [itemSelectedState, setItemSelectedState] = useState(null);
+
+	const isComplete = useSelector((state) => state.settings.value.complete);
+
 	const dispatch = useDispatch();
 
 	// //Get answer from the store
@@ -52,6 +55,7 @@ function GuessInput(props) {
 				placeholder="Type a country to start"
 				onChange={(event) => onType(event.target.value)}
 				value={guess}
+				disabled={isComplete}
 			/>
 			<AutoCompleteBox
 				suggestions={suggestions}

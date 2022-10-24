@@ -8,7 +8,7 @@ function CountrySVG(props) {
 	const country = useSelector((state) => state.answer.value);
 
 	return (
-		<div className={"w-1/4"}>
+		<div className={props.className}>
 			{console.log(country)}
 			<Image
 				src={`/all/${country.Alpha2Code}/vector.svg`}
