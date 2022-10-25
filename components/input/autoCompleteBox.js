@@ -15,13 +15,17 @@ function AutoCompleteBox(props) {
 	}, [props.suggestions, props.show]);
 
 	return (
-		<div className="">
-			<div className={`${show ? "absolute" : "hidden"}`}>
+		<div className="w-full relative ">
+			<div className={`${show ? "absolute w-full z-10 " : "hidden"}`}>
 				{props.suggestions.map((item, index) => {
 					return (
 						<div
 							key={index}
-							className="hover:bg-gray-400 hover:cursor-pointer border-t-[1px] py-2 px-2"
+							className={`hover:bg-swamp-700 hover:cursor-pointer border-t-[1px] py-2 px-2 bg-swamp-800 text-gray-300 border-x-2 border-swamp-700 border-rounded-lg ${
+								props.suggestions.length - 1 === index
+									? "rounded-b-lg border-b-2"
+									: " "
+							} `}
 							onClick={() => props.onItemPress(item)}
 							ref={suggestionsRefs.current[index]}
 						>

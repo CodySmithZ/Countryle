@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require("tailwindcss/colors");
+
 module.exports = {
 	content: [
 		"./pages/**/*.{js,ts,jsx,tsx}",
@@ -44,6 +46,20 @@ module.exports = {
 			animation: {
 				fadeInDown: "fadeInDown 1s",
 				shake: "shake 5s ease 0s infinite normal none",
+			},
+			colors: {
+				swamp: {
+					50: "#ecf9ff",
+					100: "#bde6ff",
+					200: "#7bcdff",
+					300: "#31afff",
+					400: "#00a5ff",
+					500: "#00a1ed",
+					600: "#007cbf",
+					700: "#006097",
+					800: "#004a77",
+					900: "#000d15",
+				},
 			},
 		},
 	},

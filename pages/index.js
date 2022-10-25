@@ -2,6 +2,7 @@ import CountrySVG from "../components/countrySVG";
 import GuessInput from "../components/input/guessInput";
 import Guesses from "../components/guesses/guesses";
 import CorrectModal from "../components/modal/correctModal";
+import Title from "../components/title";
 import {
 	NewCountry,
 	checkGuess,
@@ -75,17 +76,20 @@ export default function Home() {
 	};
 
 	return (
-		<div className={"flex flex-col justify-center items-center"}>
+		<div className={"flex flex-col justify-center items-center "}>
 			<CorrectModal playAgainPress={() => newGame()} />
-			<header className={"text-center text-5xl font-thin"}>
-				Countryle
+			<header>
+				<Title />
 			</header>
-			<CountrySVG className={"w-1/4"} />
+			<CountrySVG className={"w-1/4 my-10"} />
 
 			<div className={"flex justify-center flex-col items-center w-1/2 "}>
 				<GuessInput />
-				<button className="bg-blue-700" onClick={() => onSubmit()}>
-					Check
+				<button
+					className="bg-swamp-600 border-2 border-swamp-800 hover:bg-swamp-700 hover:text-gray-200 text-white text-2xl px-2 pb-2 pt-1 rounded-md my-10"
+					onClick={() => onSubmit()}
+				>
+					Check Answer
 				</button>
 				<Guesses />
 				{isComplete ? (
