@@ -9,6 +9,23 @@ module.exports = {
 	theme: {
 		extend: {
 			keyframes: {
+				bounce: {
+					"0%  ": { transform: "scale(1,1) translateY(0)" },
+					"10% ": { transform: "scale(1.1,.9) translateY(0)" },
+					"30% ": { transform: "scale(.9,1.1)   translateY(-55px)" },
+					"50% ": { transform: "scale(1.05,.95) translateY(0)" },
+					"58% ": { transform: "scale(1,1) translateY(-7px)" },
+					"65% ": { transform: "scale(1,1) translateY(0)" },
+					"100%": { transform: "scale(1,1) translateY(0)" },
+				},
+
+				upDown: {
+					"0%": { transform: "translateY(0px)" },
+					"25%": { transform: "translateY(-20px)" },
+					"50%": { transform: "translateY(0px)" },
+					"75%": { transform: "translateY(20px)" },
+					"100%": { transform: "translateY(0px)" },
+				},
 				fadeInDown: {
 					"0%": {
 						opacity: 0,
@@ -42,10 +59,23 @@ module.exports = {
 						transform: "rotate(4deg)",
 					},
 				},
+				slideIn: {
+					"0%": {
+						opacity: "0",
+						transform: "translateY(-250px)",
+					},
+
+					"100%": {
+						opacity: "1",
+						transform: "translateY(0)",
+					},
+				},
 			},
 			animation: {
 				fadeInDown: "fadeInDown 1s",
 				shake: "shake 5s ease 0s infinite normal none",
+				upDown: "bounce 2s ease infinite ",
+				slideIn: "slideIn 1s ease",
 			},
 			colors: {
 				swamp: {

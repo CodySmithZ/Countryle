@@ -4,7 +4,7 @@ import Fuse from "fuse.js";
 import { CountryCoords } from "../data/countryCoords";
 import AutoCompleteBox from "./autoCompleteBox";
 import { useDispatch, useSelector } from "react-redux";
-import { addSelection } from "../../store/guessSelectionSlice";
+import { setSelection } from "../../store/guessSelectionSlice";
 
 function GuessInput(props) {
 	const [guess, setGuess] = useState("");
@@ -13,6 +13,7 @@ function GuessInput(props) {
 	const [itemSelectedState, setItemSelectedState] = useState(null);
 
 	const isComplete = useSelector((state) => state.settings.value.complete);
+	const guesses = useSelector((state) => state.guesses.value);
 
 	const dispatch = useDispatch();
 
@@ -35,18 +36,32 @@ function GuessInput(props) {
 			setSuggestions(result); //Set recomondations to search
 			setShowSuggestions(true);
 		} else {
+			setGuess(text);
+
 			setShowSuggestions(false);
 		}
 	};
 
 	// //When item selected set it to current text, redux store and hide selection box
 	useEffect(() => {
-		dispatch(addSelection(itemSelectedState));
+		dispatch(setSelection(itemSelectedState));
 		if (itemSelectedState !== null) {
 			setGuess(itemSelectedState.item.Country);
 			setShowSuggestions(false);
 		}
 	}, [itemSelectedState]);
+
+	//Clear input when answer is correct
+	useEffect(() => {
+		if (isComplete) {
+			setGuess("");
+		}
+	}, [isComplete]);
+
+	//Clear users selection when answer submitted
+	useEffect(() => {
+		setGuess("");
+	}, [guesses]);
 
 	return (
 		<div className="flex flex-col w-full">

@@ -2,6 +2,7 @@ import CountrySVG from "../components/countrySVG";
 import GuessInput from "../components/input/guessInput";
 import Guesses from "../components/guesses/guesses";
 import CorrectModal from "../components/modal/correctModal";
+import CorrectAnswerBtn from "../components/input/checkAnswerBtn";
 import Title from "../components/title";
 import {
 	NewCountry,
@@ -12,6 +13,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addGuess, clearGuesses } from "../store/guessesSlice";
 import { showModal, setComplete } from "../store/settingsSlice";
+import { setSelection } from "../store/guessSelectionSlice";
 
 export default function Home() {
 	const guesses = useSelector((state) => state.guesses.value);
@@ -72,6 +74,8 @@ export default function Home() {
 					})
 				);
 			}
+			//Clear selection on submit
+			dispatch(setSelection(null));
 		}
 	};
 
@@ -82,24 +86,20 @@ export default function Home() {
 				<Title />
 			</header>
 			<CountrySVG className={"w-1/4 my-10"} />
-
+			{isComplete ? (
+				<button
+					className="bg-green-700 rounded-md text-lg py-2 px-2 mt-10 animate-shake border-green-800 border-2 text-white "
+					onClick={() => newGame()}
+				>
+					Play Again
+				</button>
+			) : null}
 			<div className={"flex justify-center flex-col items-center w-1/2 "}>
 				<GuessInput />
-				<button
-					className="bg-swamp-600 border-2 border-swamp-800 hover:bg-swamp-700 hover:text-gray-200 text-white text-2xl px-2 pb-2 pt-1 rounded-md my-10"
-					onClick={() => onSubmit()}
-				>
-					Check Answer
-				</button>
+				<div className={"my-10 w-full "}>
+					<CorrectAnswerBtn onSubmit={() => onSubmit()} />
+				</div>
 				<Guesses />
-				{isComplete ? (
-					<button
-						className="bg-green-700 rounded-md text-lg py-2 px-2 mt-10 animate-shake border-green-800 border-2"
-						onClick={() => newGame()}
-					>
-						Play Again
-					</button>
-				) : null}
 			</div>
 		</div>
 	);

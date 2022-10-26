@@ -4,7 +4,11 @@ import { BsFillArrowUpCircleFill } from "react-icons/bs";
 
 function Guess(props) {
 	return (
-		<div className="flex flex-row items-stretch justify-between bg-swamp-800 border-2 border-swamp-700 rounded-md">
+		<div
+			className={`flex flex-row items-stretch justify-between bg-swamp-800 border-2 border-swamp-700 rounded-md animate-slideIn transition-all ${
+				props.topMargin ? "mt-2" : ""
+			}`}
+		>
 			<div className=" text-white px-2 ">{props.guess.item.Country}</div>{" "}
 			<div className=" text-white px-2 ">
 				{" "}
@@ -12,7 +16,9 @@ function Guess(props) {
 			</div>
 			<div className=" text-white px-2 pt-1">
 				<BsFillArrowUpCircleFill
-					style={{ transform: `rotate(${props.guess.bearing}deg)` }}
+					style={{
+						transform: `rotate(${props.guess.bearing}deg)`,
+					}}
 				/>
 			</div>
 		</div>

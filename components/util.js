@@ -8,6 +8,8 @@ export const NewCountry = () => {
 	let country =
 		CountryCoords[Math.floor(Math.random() * CountryCoords.length)];
 
+	console.log(country);
+
 	//Save country to store
 	store.dispatch(setAnswer(country));
 };
@@ -26,14 +28,6 @@ export const checkGuess = (guessCounty, answerCountry) => {
 export const getDistanceAndBearing = (guessCounty, answerCountry) => {
 	//Calculate distance between both points
 	const distance = getDistanceFromLatLonInKm(
-		answerCountry.Latitude,
-		answerCountry.Longitude,
-		guessCounty.item.Latitude,
-		guessCounty.item.Longitude
-	);
-
-	console.log(
-		"dd",
 		answerCountry.Latitude,
 		answerCountry.Longitude,
 		guessCounty.item.Latitude,
@@ -89,10 +83,8 @@ const getBearing = (startLatTmp, startLngTmp, destLatTmp, destLngTmp) => {
 		Math.cos(startLat) * Math.sin(destLat) -
 		Math.sin(startLat) * Math.cos(destLat) * Math.cos(destLng - startLng);
 	let brng = Math.atan2(y, x);
-	console.log("b", brng, y, x);
 
 	brng = rad2deg(brng);
-	console.log("b", brng);
 	return (brng + 360) % 360;
 };
 

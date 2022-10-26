@@ -8,12 +8,12 @@ export const guessSelection = createSlice({
 	name: "guessSelection",
 	initialState,
 	reducers: {
-		addSelection: (state, action) => {
+		setSelection: (state, action) => {
 			state.value = action.payload;
 		},
 	},
 });
 
-export const { addSelection } = guessSelection.actions;
+export const { setSelection } = guessSelection.actions;
 
 export default guessSelection.reducer;

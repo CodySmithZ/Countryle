@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	value: { showModal: true, complete: true },
+	value: { showModal: false, complete: false },
 };
 
 export const settingsSlice = createSlice({
