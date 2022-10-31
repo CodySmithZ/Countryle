@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Image from "next/image";
 import { useSelector } from "react-redux";
+// import Vector from "./all/AU/vector.svg";
 
 function CountrySVG(props) {
 	//Get answer country
@@ -14,8 +15,9 @@ function CountrySVG(props) {
 				filter: "invert(90%)",
 			}}
 		>
+			{/* <Vector /> */}
 			<Image
-				src={`/all/${country.Alpha2Code}/vector.svg`}
+				src={`https://raw.githubusercontent.com/CodySmithZ/mapsicon/master/all/${country.Alpha2Code.toLowerCase()}/vector.svg`}
 				alt={"Hidden country image"}
 				className={"grayscale"}
 				layout={"responsive"}
