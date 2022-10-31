@@ -16,7 +16,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.6.0",
-    "react-transition-group": "^4.4.5"
+    "react-transition-group": "^4.4.5",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.5.1",

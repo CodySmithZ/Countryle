@@ -25,7 +25,14 @@ export default function Home() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		NewCountry();
+		if (
+			answer &&
+			Object.keys(answer).length === 0 &&
+			Object.getPrototypeOf(answer) === Object.prototype
+		) {
+			NewCountry();
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {

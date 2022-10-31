@@ -17,7 +17,7 @@ function CountrySVG(props) {
 		>
 			{/* <Vector /> */}
 			<Image
-				src={`https://raw.githubusercontent.com/CodySmithZ/mapsicon/master/all/${country.Alpha2Code.toLowerCase()}/vector.svg`}
+				src={`https://raw.githubusercontent.com/CodySmithZ/mapsicon/master/all/${country.Alpha2Code?.toLowerCase()}/vector.svg`}
 				alt={"Hidden country image"}
 				className={"grayscale"}
 				layout={"responsive"}
