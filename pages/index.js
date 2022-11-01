@@ -87,12 +87,16 @@ export default function Home() {
 	};
 
 	return (
-		<div className={"flex flex-col justify-center items-center "}>
+		<div
+			className={
+				"flex flex-col justify-center items-center align-center w-full px-5 sm:px-0 sm:w-3/5 lg:w-3/6 xl:w-1/3 2xl:w-1/3 m-auto "
+			}
+		>
 			<CorrectModal playAgainPress={() => newGame()} />
 			<header>
 				<Title />
 			</header>
-			<CountrySVG className={"w-1/4 my-10"} />
+			<CountrySVG className={"w-1/2 my-10"} />
 			{isComplete ? (
 				<button
 					className="bg-green-700 rounded-md text-lg py-2 px-2 mt-10 animate-shake border-green-800 border-2 text-white "
@@ -101,13 +105,15 @@ export default function Home() {
 					Play Again
 				</button>
 			) : null}
-			<div className={"flex justify-center flex-col items-center w-1/2 "}>
-				<GuessInput />
-				<div className={"my-10 w-full "}>
-					<CorrectAnswerBtn onSubmit={() => onSubmit()} />
-				</div>
+			{/* <div className={"flex justify-center flex-col items-center w-full"}> */}
+			<GuessInput />
+			<div className={"my-10 w-full "}>
+				<CorrectAnswerBtn onSubmit={() => onSubmit()} />
+			</div>
+			<div className={"w-full sm:w-3/4"}>
 				<Guesses />
 			</div>
+			{/* </div> */}
 		</div>
 	);
 }
