@@ -20,5 +20,5 @@ This project can be played at - [Countryle.CodySmith.me](http://countryle.codysm
 Distributed under the MIT License. See LICENSE.txt for more information
 
 ## Credit
-Based of [worldle.teuteuf.fr](https://worldle.teuteuf.fr/)
-Country information - [tadast/countries_codes_and_coordinates.csv](https://gist.github.com/tadast/8827699)
+ - Based of [worldle.teuteuf.fr](https://worldle.teuteuf.fr/)
+ - Country information - [tadast/countries_codes_and_coordinates.csv](https://gist.github.com/tadast/8827699)
