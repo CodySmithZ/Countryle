@@ -42,6 +42,7 @@ function AutoCompleteBox(props) {
 				}
 			}
 
+			// eslint-disable-next-line react-hooks/exhaustive-deps
 			setIndex((index += add));
 		};
 
@@ -50,9 +51,6 @@ function AutoCompleteBox(props) {
 			window.removeEventListener("keydown", preventDefault, false);
 		};
 	}, [index]);
-	// useEffect(() => {
-	// 	console.log("F", focusIndex, props.suggestions.length);
-	// }, [focusIndex]);
 
 	useEffect(() => {
 		setFocusIndex(index);

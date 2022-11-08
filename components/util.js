@@ -8,8 +8,6 @@ export const NewCountry = () => {
 	let country =
 		CountryCoords[Math.floor(Math.random() * CountryCoords.length)];
 
-	console.log(country);
-
 	//Save country to store
 	store.dispatch(setAnswer(country));
 };
