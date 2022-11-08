@@ -87,33 +87,47 @@ export default function Home() {
 	};
 
 	return (
-		<div
-			className={
-				"flex flex-col justify-center items-center align-center w-full px-5 sm:px-0 sm:w-3/5 lg:w-3/6 xl:w-1/3 2xl:w-1/3 m-auto "
-			}
-		>
-			<CorrectModal playAgainPress={() => newGame()} />
-			<header>
-				<Title />
-			</header>
-			<CountrySVG className={"w-1/2 my-10"} />
-			{isComplete ? (
+		<div className="h-screen flex flex-col justify-between">
+			<div
+				className={
+					"flex flex-col justify-center items-center align-center w-full px-5 mt-5 sm:px-0 sm:w-3/5 lg:w-3/6 xl:w-1/3 2xl:w-1/3 m-auto "
+				}
+			>
+				<CorrectModal playAgainPress={() => newGame()} />
+				<header>
+					<Title />
+				</header>
+				<CountrySVG className={"w-1/2 my-10"} />
+				{isComplete ? (
+					<button
+						className="bg-green-700 rounded-md text-lg py-2 px-2 mt-10 animate-shake border-green-800 border-2 text-white "
+						onClick={() => newGame()}
+					>
+						Play Again
+					</button>
+				) : null}
+				{/* <div className={"flex justify-center flex-col items-center w-full"}> */}
+				<GuessInput />
+				<div className={"my-10 w-full "}>
+					<CorrectAnswerBtn onSubmit={() => onSubmit()} />
+				</div>
+				<div className={"w-full sm:w-3/4"}>
+					<Guesses />
+				</div>
+				{/* </div> */}
+			</div>
+			<div
+				className={
+					" flex w-full -scroll-mt-9 pt-10 md:pr-2 md:mb-2 justify-center lg:justify-end"
+				}
+			>
 				<button
-					className="bg-green-700 rounded-md text-lg py-2 px-2 mt-10 animate-shake border-green-800 border-2 text-white "
+					className="text-swamp-800 rounded-md px-2 pb-0.5 pt-.5 font-bold border-2 border-swamp-800"
 					onClick={() => newGame()}
 				>
-					Play Again
+					Reset - New Country
 				</button>
-			) : null}
-			{/* <div className={"flex justify-center flex-col items-center w-full"}> */}
-			<GuessInput />
-			<div className={"my-10 w-full "}>
-				<CorrectAnswerBtn onSubmit={() => onSubmit()} />
 			</div>
-			<div className={"w-full sm:w-3/4"}>
-				<Guesses />
-			</div>
-			{/* </div> */}
 		</div>
 	);
 }

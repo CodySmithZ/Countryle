@@ -74,6 +74,7 @@ function GuessInput(props) {
 				onChange={(event) => onType(event.target.value)}
 				value={guess}
 				disabled={isComplete}
+				onFocus={() => console.log("DD")}
 			/>
 			<AutoCompleteBox
 				suggestions={suggestions}

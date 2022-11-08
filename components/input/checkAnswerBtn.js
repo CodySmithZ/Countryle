@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { CgSpinner } from "react-icons/cg";
 import { useSelector } from "react-redux";
@@ -9,7 +9,7 @@ function CheckAnswerBtn(props) {
 	const guessSelection = useSelector((state) => state.guessSelection.value);
 
 	//Wait for 1 second before submitting
-	const onPress = () => {
+	const onPress = useCallback(() => {
 		if (guessSelection != null) {
 			setLoading(true);
 			const timer = setTimeout(() => {
@@ -17,7 +17,21 @@ function CheckAnswerBtn(props) {
 				props.onSubmit();
 			}, 1000);
 		}
-	};
+	}, [props, guessSelection]);
+
+	useEffect(() => {
+		const preventDefault = (e) => {
+			if (e.code === "Enter") {
+				e.preventDefault();
+				onPress();
+			}
+		};
+
+		window.addEventListener("keydown", preventDefault, false);
+		return () => {
+			window.removeEventListener("keydown", preventDefault, false);
+		};
+	}, [onPress]);
 	return (
 		<div>
 			{/* <Tooltip /> */}

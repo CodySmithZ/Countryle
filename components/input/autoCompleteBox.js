@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useRef, createRef } from "react";
 import PropTypes from "prop-types";
+import Suggestion from "./suggestion";
 
 function AutoCompleteBox(props) {
 	const [show, setShow] = useState(false);
-	const suggestionsRefs = useRef(props.suggestions.map(() => createRef()));
+	const [suggestionsLength, setSuggestionsLength] = useState(0);
+	const [focusIndex, setFocusIndex] = useState(0);
+	const [index, setIndex] = useState(0);
 
 	//Check if any suggestions are passed
 	useEffect(() => {
@@ -11,26 +14,72 @@ function AutoCompleteBox(props) {
 			setShow(true);
 		} else {
 			setShow(false);
+			setFocusIndex(0);
+			// window.removeEventListener("keydown", preventDefault, false);
 		}
 	}, [props.suggestions, props.show]);
+
+	useEffect(() => {
+		setSuggestionsLength(props.suggestions.length);
+		setIndex(0);
+		setFocusIndex(0);
+	}, [props.suggestions]);
+	useEffect(() => {}, [suggestionsLength]);
+
+	useEffect(() => {
+		const preventDefault = (e) => {
+			let add = 0;
+			if (e.code === "ArrowDown") {
+				e.preventDefault();
+				add = 1;
+			} else if (e.code === "ArrowUp") {
+				e.preventDefault();
+				add = -1;
+			} else if (e.code === "Enter") {
+				if (index > 0 && index < props.suggestions.length) {
+					e.preventDefault();
+					props.onItemPress(props.suggestions[index - 1]);
+				}
+			}
+
+			setIndex((index += add));
+		};
+
+		window.addEventListener("keydown", preventDefault, false);
+		return () => {
+			window.removeEventListener("keydown", preventDefault, false);
+		};
+	}, [index]);
+	// useEffect(() => {
+	// 	console.log("F", focusIndex, props.suggestions.length);
+	// }, [focusIndex]);
+
+	useEffect(() => {
+		setFocusIndex(index);
+	}, [index]);
+
+	useEffect(() => {
+		if (index > suggestionsLength) {
+			setIndex(1);
+		} else if (index < 0) {
+			setIndex(suggestionsLength);
+		}
+	}, [suggestionsLength, index]);
 
 	return (
 		<div className="w-full relative ">
 			<div className={`${show ? "absolute w-full z-10 " : "hidden"}`}>
 				{props.suggestions.map((item, index) => {
 					return (
-						<div
+						<Suggestion
 							key={index}
-							className={`hover:bg-swamp-700 hover:cursor-pointer border-t-[1px] py-2 px-2 bg-swamp-800 text-gray-300 border-x-2 border-swamp-700 border-rounded-lg ${
+							onItemPress={(item) => props.onItemPress(item)}
+							item={item}
+							roundedBottom={
 								props.suggestions.length - 1 === index
-									? "rounded-b-lg border-b-2"
-									: " "
-							} `}
-							onClick={() => props.onItemPress(item)}
-							ref={suggestionsRefs.current[index]}
-						>
-							{item.item.Alpha2Code} - {item.item.Country}
-						</div>
+							}
+							focus={focusIndex - 1 === index}
+						></Suggestion>
 					);
 				})}
 			</div>
